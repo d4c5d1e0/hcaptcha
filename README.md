@@ -71,3 +71,51 @@ Current version 17-06-2022: `1.11.0/f147ef1`
 - Result: `Array`
 - Value: See script for more info
 - Hashed: **true**
+### 1001
+- Result: `Array`
+- Value: Audio Fingerprinting
+- Hashed: **true**
+### 1002
+- Result: `Bool`
+- Value: Detect lie about your audio fingerprint (i guess?)
+- Hashed: **false**
+### 1101
+- Result: `String`
+- Value: Canvas fingerprinting
+- Hashed: **true**
+### 1102
+- Result: `Bool`
+- Value: TBD 
+- Hashed: **false**
+### 1301
+- Result: `Array`
+- Value: Fonts installed on the system 
+- Hashed: **false**
+### 1401
+- Result: `String`
+- Value: TimeZone
+- Hashed: **false**
+### 1402
+- Result: `Array`
+- Value: `[Timezone,See script,new Date("1/1/1970").getTimezoneOffset(),See script,See script]`
+- Hashed: **false**
+### 1601
+- Result: `Bool`
+- Value: TBD (related to bluetooth?)
+- Hashed: **false**
+### 1901
+- Result: `Array`
+- Value: Math Fingerprinting, Hash is different across browser types
+- Hashed: **true**
+### 2401
+- Result: `Array`
+- Value: WebGL properties hash
+- Hashed: **true**
+### 2402
+- Result: `Array`
+- Value: WebGL Vendor & Renderer
+- Hashed: **false**
+### 2403
+- Result: `Array`
+- Value: WebGL2 Vendor & Renderer
+- Hashed: **false**
