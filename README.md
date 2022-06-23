@@ -89,7 +89,7 @@ Current version 17-06-2022: `1.11.0/f147ef1`
 - Hashed: **false**
 ### 1301
 - Result: `Array`
-- Value: Fonts installed on the system 
+- Value: Check if specifics fonts are installed in the system
 - Hashed: **false**
 ### 1401
 - Result: `String`
