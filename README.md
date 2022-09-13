@@ -227,5 +227,5 @@ Parameters explanation: `1.15.1`
 - Hashed: **true**
 ### 3002
 - Result: `Number`
-- Value: Lenght of all window function (not sure lol)
+- Value: Length of all window function (not sure lol)
 - Hashed: **false**
