@@ -7,10 +7,14 @@ You can fetch the script at this URL: `https://newassets.hcaptcha.com/i/{VERSION
 
 It collects various device fingerprinting data, most of them are listed below.
 
-Current version 13-09-2022: `1.17.1/d5ef5ba`
+Current version 28-10-2022: `1.18.0/bc030dc`
 
-Parameters explanation: `1.15.1`
+Parameters explanation: `1.18.0` (Up to date)
 
+### Note:
+- They seem to be running extra checks depending on the "security" parameter enabled eg. *cloudflare* captcha is high security so the worker check is ran everytime.
+- The Worker check is not ran on others website EXCEPT if you spam solve with the same ip
+- This script is written in Typescript
 
 # Parameters
 
@@ -20,11 +24,15 @@ Parameters explanation: `1.15.1`
 - Hashed: **false**
 ### 102
 - Result: `bool`
-- Value: Screen properties check (see script for more info)
+- Value: Screen dimensions check [more info](https://gist.github.com/d4c5d1e0/6c85cdfaf8eea7b722c3fd669851ede5)
 - Hashed: **false**
 ### 103
 - Result: `Array`
-- Value: Screen properties check (see script for more info)
+- Value: *s as window.screen* `[s.width,s.height,s.availWidth,s.availHeight,s.colorDepth,s.pixelDepth,navigator.maxTouchPoints,devicePixelRatio]`
+- Hashed: **false**
+### 104
+- Result: `Bool`
+- Value: *s as window.screen* `!(s.width - s.availWidth || s.height - s.availHeight);`
 - Hashed: **false**
 ### 201
 - Result: `Array`
@@ -33,6 +41,18 @@ Parameters explanation: `1.15.1`
 ### 202
 - Result: `Array`
 - Value: Don't really know how to explain this one (see script for more info)
+- Hashed: **false**
+### 203
+- Result: `Bool`
+- Value: Some sort of CSS fingerprinting [see](https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects); return false on most browsers
+- Hashed: **false**
+### 204
+- Result: `String`
+- Value: Supported emojis (fingerprinting)
+- Hashed: **false**
+### 205
+- Result: `Bool`
+- Value: Some sort of CSS fingerprinting [see](https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects); return false on most browsers
 - Hashed: **false**
 ### 301
 - Result: `Array`
@@ -56,7 +76,7 @@ Parameters explanation: `1.15.1`
 ### 402
 - Result: `Number`
 - Value: `Object.getOwnPropertyNames(window).length`
-- Hashed: **true**
+- Hashed: **false**
 ### 501
 - Result: `Array`
 - Value: Supported media sources
@@ -66,9 +86,9 @@ Parameters explanation: `1.15.1`
 - Value: User-Agent
 - Hashed: **false**
 ### 602
-- Result: `Object`
-- Value: Checks the integrity of the navigator object properties
-- Hashed: **true**
+- Result: `Array`
+- Value: *n as window.navigator* `[n.language,n.languages,n.platform,n.oscpu]`
+- Hashed: **false**
 ### 603
 - Result: `Array`
 - Value: `[deviceMemory,hardwareConcurrency]`
@@ -87,12 +107,20 @@ Parameters explanation: `1.15.1`
 - Hashed: **false**
 ### 801
 - Result: `Array`
-- Value: See script for more info
-- Hashed: **true**
+- Value: matchMedia() CSS Properties [info](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
+- Hashed: **false**
 ### 901
 - Result: `Array`
 - Value: Some voices fingerprinting data
 - Hashed: **true**
+### 902
+- Result: `Array`
+- Value: Enabled voices name
+- Hashed: **false**
+### 903
+- Result: `String`
+- Value: First enabled voice locale eg. "en-US"
+- Hashed: **false**
 ### 1001
 - Result: `Array`
 - Value: Audio Fingerprinting
@@ -145,6 +173,10 @@ Parameters explanation: `1.15.1`
 - Result: `Array`
 - Value: Math Fingerprinting, Hash is different across browser types
 - Hashed: **true**
+### 1902
+- Result: `Number`
+- Value:  Some error stack inspection function [more here](https://gist.github.com/d4c5d1e0/be0c44d4f721719f14c465f3159ffd7c)
+- Hashed: **false**
 ### 2001
 - Result: `Array`
 - Value: Navigator Permissions
@@ -159,19 +191,19 @@ Parameters explanation: `1.15.1`
 - Hashed: **true**
 ### 2301
 - Result: `String`
-- Value: Worker User-Agent
+- Value: `Worker Check`: Worker User-Agent
 - Hashed: **false**
 ### 2302
 - Result: `Bool`
-- Value: Is worker User-Agent same as Browser
+- Value: `Worker Check`: Is worker User-Agent same as Browser
 - Hashed: **false**
 ### 2303
 - Result: `Array`
-- Value:   Languages and Locale from Worker + language from browser
+- Value:  `Worker Check`: Languages and Locale from Worker + language from browser
 - Hashed: **false**
 ### 2304
 - Result: `Array`
-- Value: Some errors from the Worker
+- Value: `Worker Check`: Some errors from the Worker
 - Hashed: **false**
 ### 2401
 - Result: `Array`
@@ -191,11 +223,11 @@ Parameters explanation: `1.15.1`
 - Hashed: **true**
 ### 2601
 - Result: `Array`
-- Value: Checks for known automation extensions
+- Value: `Worker Check`: Checks for known automation extensions
 - Hashed: **false**
 ### 2701
 - Result: `Array`
-- Value: [lengthOfSomeFunctions,Object.getOwnPropertyNames(window.chrome || {}),check if it's a process]
+- Value: [lengthOfSomeFunctions,Object.getOwnPropertyNames(window.chrome || {}),check if it's a process ?]
 - Hashed: **false**
 ### 2702
 - Result: `Array`
@@ -221,6 +253,14 @@ Parameters explanation: `1.15.1`
 - Result: `Array`
 - Value: Checks some properties related to the navigator and Window
 - Hashed: **false**
+### 2902
+- Result: `Array`
+- Value:  TBD
+- Hashed: **false**
+### 2903
+- Result: `Bool`
+- Value: `!!navigator.webdriver`
+- Hashed: **false**
 ### 3001
 - Result: `Array`
 - Value: Checks integrity of all Window functions
@@ -228,4 +268,16 @@ Parameters explanation: `1.15.1`
 ### 3002
 - Result: `Number`
 - Value: Length of all window function (not sure lol)
+- Hashed: **false**
+### 3101
+- Result: `Array`
+- Value: TBD (not actived yet)
+- Hashed: **false**
+### 3201
+- Result: `Number`
+- Value: `Math.max(Math.floor(n / 1073741824)`
+- Hashed: **false**
+### 3202
+- Result: `Number`
+- Value: `e.sent().quota` ?? TBD
 - Hashed: **false**
