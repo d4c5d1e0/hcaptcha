@@ -12,9 +12,7 @@ Current version 28-10-2022: `1.18.0/bc030dc`
 Parameters explanation: `1.18.0` (Up to date)
 
 ### Note:
-- They seem to be running extra checks depending on the "security" parameter enabled eg. *cloudflare* captcha is high security so the worker check is ran everytime.
-- The Worker check is not ran on others website EXCEPT if you spam solve with the same ip
-- This script is written in Typescript
+- They seem to be running extra checks depending on the "security" parameter enabled eg. when solving AND/OR failing too many captchas in a row, some extra automation checks (worker, proxy spoofing,automation extensions...) are ran
 
 # Parameters
 
